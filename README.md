@@ -1,1 +1,16 @@
-# linux-demo
+- 解决 fatal: unable to access 'https://github.com/Robbin16/linux-demo.git/': Failed to connect to github.com port 443 after 21096 ms: Timed out
+  - git config --global --unset http.proxy
+  - git config --global --unset https.proxy
+- man pwd 查看 pwd 命令帮助手册
+  - man -a passwd 查看除了 linux 下的 passwd 命令之外的，openssl 中的 passwd 命令
+- type cd 查看命令是内部命令还是外部命令
+  - help cd 内部命令用这个格式的 help 查看
+  - ls --help 外部命令 help 格式
+- info ls info 比 help 更详细
+- pwd 查看当前路径
+- [root@localhost /]# #表示权限不受限
+- su - root 切换为 root 用户
+- clear 或者快捷键 ctrl+l 清屏
+- ls -l 长格式显示 -r 逆序显示(默认按照文件名首字母逆序显示) -t 按照时间显示 -R 递归显示 可以合并为 ls -lrtR 参数也没有前后顺序之分
+- man cd cd 是内部命令，man 内部命令 得到的都是对 bash 的说明 应该用 help cd
+- cd - 返回上一次目录
