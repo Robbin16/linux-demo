@@ -14,3 +14,14 @@
 - ls -l 长格式显示 -r 逆序显示(默认按照文件名首字母逆序显示) -t 按照时间显示 -R 递归显示 可以合并为 ls -lrtR 参数也没有前后顺序之分
 - man cd cd 是内部命令，man 内部命令 得到的都是对 bash 的说明 应该用 help cd
 - cd - 返回上一次目录
+- mkdir -p ./a/b/c/d 创建多级目录(如果有则不创建)
+- rm -r ./a 删除 a 及 a 的子目录，删除时需要确定 -f 强制删除 不需要确定不会有提示并且无论成功与否都不显示结果
+- cp ~/filea/textb /tmp/textb 复制文件或目录 -v 增加提示 -p 复制文件或者文件夹连带复制时间 -a 复制文件或者文件夹连带权限 属主 时间复制
+- touch texta 新建文件
+- mv filea filed 移动文件或者文件夹 linux 底层文件或者文件夹改名其实也是移动
+- cp file* /tmp 通配符*表示所有 ?表示占用一个字符
+- cat filea 查看文件的全部内容
+- head filea 查看文件前十行内容 -3 表示只前显示 3 行
+- tail filea 查看文件后十行内容 -3 表示只后显示 3 行 -f 表示文件更新终端会同步显示
+- more filea less filea 查看文件内容
+- wc -l filea 显示文件内容行数
