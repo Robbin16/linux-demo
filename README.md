@@ -9,7 +9,7 @@
 - info ls info 比 help 更详细
 - pwd 查看当前路径
 - [root@localhost /]# #表示权限不受限
-- su - root 切换为 root 用户
+- su - root 切换为 root 用户 exit 退出账户 不退出账户会一直占用 bash 进程
 - clear 或者快捷键 ctrl+l 清屏
 - ls -l 长格式显示 -r 逆序显示(默认按照文件名首字母逆序显示) -t 按照时间显示 -R 递归显示 可以合并为 ls -lrtR 参数也没有前后顺序之分
 - man cd cd 是内部命令，man 内部命令 得到的都是对 bash 的说明 应该用 help cd
@@ -25,3 +25,41 @@
 - tail filea 查看文件后十行内容 -3 表示只后显示 3 行 -f 表示文件更新终端会同步显示
 - more filea less filea 查看文件内容
 - wc -l filea 显示文件内容行数
+- vim 模式有正常模式 插入模式 命令行模式(末行模式)
+- 在正常模式下 调节上下左右光标位置可以用 kjhl
+- ioa 可以进入插入模式 o 插入光标后一行 O 插入光标前一行 a 插入光标后一个字符 A 是插入光标行尾
+- :!ifconfig !后面可以执行命令
+- /x 搜索 x 字符 n 向下查找 shift+n 向上查找
+- :s/old/new 当前行单次替换字符
+- :%s/old/new 所有行单次替换字符 /g 所有行多次替换字符
+- :set nohlsearch 移除搜索后高亮显示
+- :3,5s/x/X/g 3-5 行之间多次替换字符
+- :set nu 设置行号 nonu 取消行号
+- /etc/vimrc 修改 vim 配置文件
+- shift + g 光标到最后一行行首
+- v 可视字符模式 V 可视行模式 ctrl + v 可视块模式 选中后 shift + i 输入完成 按两下 esc 批量插入 d 批量删除 y 批量复制
+- u 撤销一步
+- 用户分为 root 和普通用户 root 所有文件夹都能访问 普通用户只能访问自己的家目录
+- useradd 新用户 新建用户 系统首先给用户分配 uid 增加家目录/home/新用户 /etc/passwd 增加用户 /etc/shadow 影子文件增加用户
+- id 查看当前是哪个用户
+- passwd 新用户 修改新用户密码
+- userdel 用户 删除用户但保留家目录 家目录属主与属组都变成了数字表示没有属主与属组 只有 root 用户能访问 -r 删除用户同时删除家目录
+- usermod -d /home/w1 w 将用户家目录改为 w1 但之前的 w 家目录里的配置文件不会自动迁移过来
+- groupadd group1 新建用户组
+- usermod -g group1 w 将用户 w 改为 group1 分组
+- useradd -g group1 w1 新建用户 w1 并加入 group1 分组
+- groupdel group1 删除分组 删除的前提是组里必须没有用户
+- /etc/group 查询有多少个用户组
+- visudo paulxue ALL=/sbin/shutdown -c paulxue 是用户 %group 是用户组 localhost 是字符终端 ALL 是字符终端 图形终端 SSH 登陆终端
+- 通过 visudo 设置的命令 需要 sudo /sbin/shutdown -c 命令需要全路径
+- which shutdown 查看命令的路径
+- shutdown -h 30 30 分钟后关机
+- /etc/passwd paulxue:x:0:0:paulxue:/home/paulxue:/bin/bash paulxue 用户 x 表示要输入密码 0 表示 uid 0 表示 gid paulxue 表示注释 /home/paulxue 表示家目录地址 /bin/bash 表示 shell 刚进入要执行哪个程序 /sbin/nologin
+- /etc/shadow root:$6$xxxxx root 用户名 $6$xxxx 加密的用户登陆密码 即使不同用户密码相同 但加密后的字符串也不同
+- /etc/group wheel:x:10:paulxue,wwww wheel 用户组名 x 组是否需要密码验证 10 gid paulxue wwww 指定用户 paulxue wwww 属于其他组(wheel)
+- -rw-r--r-- paulxue paulxue 创建时间 filea
+- 文件类型 一经创建无法改变 - 普通文件 d 目录文件 b 块特殊文件(移动硬盘) c 字符特殊文件(终端) l 符号链接(类似 windows 的快捷方式) f 命名管道 s 套接字文件(这两个是进程通信相关的)
+- 对普通文件而言 r 读 w 写 x 执行 r=4 w=2 x=1(八进制数字表示)
+- vim 写入文件的本质是先新建一个.隐藏文件，保存并退出后再将.隐藏文件替换掉原文件
+- 对目录文件而言 x 可以进入目录 rx 可以进入目录以及查看目录内的文件 wx 可以进入目录并修改文件名或者删除文件
+- ls -l ./test 查看文件夹test里面的文件 而 ls -ld ./test 查看test文件夹本身
