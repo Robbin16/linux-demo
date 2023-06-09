@@ -62,4 +62,25 @@
 - 对普通文件而言 r 读 w 写 x 执行 r=4 w=2 x=1(八进制数字表示)
 - vim 写入文件的本质是先新建一个.隐藏文件，保存并退出后再将.隐藏文件替换掉原文件
 - 对目录文件而言 x 可以进入目录 rx 可以进入目录以及查看目录内的文件 wx 可以进入目录并修改文件名或者删除文件
-- ls -l ./test 查看文件夹test里面的文件 而 ls -ld ./test 查看test文件夹本身
+- ls -l ./test 查看文件夹 test 里面的文件 而 ls -ld ./test 查看 test 文件夹本身
+- root 用户不受文件权限的限制 文件权限限制的是非 root 用户
+- chown paulxue:paulxue ./test 修改属主为 paulxue 属组为 paulxue
+- chgrp paulxue ./test 修改属组为 paulxue
+- ctrl + r 查找之前输入过的命令 如果查的不对多按几次 ctrl + r 按回车或者右键选择命令
+- chmod a=rwx ./test a 表示属主属组其他人 u 表示属主 g 表示属组 u=rwx u-r u+r 设置文件字符权限
+- chmod 644 ./test
+- linux 默认权限是 666 - umask(022 文件掩码) = 644 创建普通文件的默认权限
+- echo 123 > ./test 将 test 文件内容清空改为 123
+- ----w---- paulxue paulxue ./test 虽然 paulxue 用户属于 paulxue 属组 但同时他也是该文件的属主 因此不具备写权限 权限冲突以属主为主
+- SUID 用于普通文件 执行时取得属主权限 /usr/bin/passwd rws------
+- SGID 用于文件夹 该文件夹下创建的文件与文件夹属组与父文件夹属组相同 一般是共享文件夹 ---rws---
+- SBIT 用于文件夹 该文件夹下创建的文件与文件夹仅自己和 root 可以删除 ------rwt
+- SUID 相当于 4 SGID 相当于 2 SBIT 相当于 1 chmod 4644 ./test 临时文件夹 /tmp
+- 小写的 st 相当于即有 x 又有 t 或者 s 大写的就只有 S 或者 T
+- centos7 一致性网络设备命名 eth0(第一块网卡也叫网络接口) 这里区分为 eno1(板载网卡) ens33(PCI-E 网卡) enp0s3(无法获取物理信息的 PCI-E 网卡)
+- /sbin/ifconfig root 用户可以直接用 ifconfig
+- /etc/default/grub 增加 biosdevname=0 net.ifnames=0
+- grub 是给用户看的 真正系统调用用的是 /boot/grub2/grub.cfg 因此需要通过 grub2-mkconfig 命令 读取/etc/default/grub 生成到对应的/boot/grub2/grub.cfg 让系统读取
+- reboot 重启系统
+- mii-tool eth0 查看网线是否连接 在虚拟机上使用报错
+- route -n 查看路由情况 -n 不解析域名直接显示 ip 地址
